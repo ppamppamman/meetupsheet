@@ -108,7 +108,7 @@
         throw new Error('Invalid periodDuration');
       }
 
-      this.periodInterval = 60 / this.settings.periodDuration;
+      this.periodInterval = 90 / this.settings.periodDuration;
       this.periodHeight = 24 * this.periodInterval;
       this.periodPosition = 60 / this.periodInterval;
 
@@ -124,6 +124,7 @@
         // $(this.element).on('mousedown', '.jqs-day', function (event) {
         $(this.element).on('touchstart', '.jqs-day', function (event) {
           // var offset = event.pageY - $(this).offset().top;
+          
           var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
           lastPageY = event.originalEvent.touches[0].pageY;
           console.log(lastPageY)
@@ -145,28 +146,29 @@
         });
         
         // $(this.element).on('mousemove', '.jqs-day', function (event) {
-        $(this.element).on('touchmove', '.jqs-day', function (event) {
-          if (helper) {
-            // var offset = event.pageY - $(this).offset().top;
-            var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
-            lastPageY = event.originalEvent.touches[0].pageY;
-            console.log(lastPageY)
-            var height = Math.round(offset / $this.periodPosition) - position;
-            if (height <= 0) {
-              height = 1;
-            }
+        // $(this.element).on('touchmove', '.jqs-day', function (event) {
 
-            helper.css({
-              'height': height * $this.periodPosition
-            });
+        //   if (helper) {
+        //     // var offset = event.pageY - $(this).offset().top;
+        //     var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
+        //     lastPageY = event.originalEvent.touches[0].pageY;
+        //     console.log(lastPageY)
+        //     var height = Math.round(offset / $this.periodPosition) - position;
+        //     if (height <= 0) {
+        //       height = 1;
+        //     }
 
-            if (height >= 1) {
-              $('.jqs-period-helper-time', helper).text($this.periodInit(position, position + height));
-            } else {
-              $('.jqs-period-helper-time', helper).text('');
-            }
-          }
-        });
+        //     helper.css({
+        //       'height': height * $this.periodPosition
+        //     });
+
+        //     if (height >= 1) {
+        //       $('.jqs-period-helper-time', helper).text($this.periodInit(position, position + height));
+        //     } else {
+        //       $('.jqs-period-helper-time', helper).text('');
+        //     }
+        //   }
+        // });
 
         // $(this.element).on('mouseup', '.jqs-day', function (event) {
         $(this.element).on('touchend', '.jqs-day', function (event) {
@@ -297,6 +299,7 @@
             var options = {};
             var height, position;
             if ($.isArray(period)) {
+              console.log(period)
               position = $this.positionFormat(period[0]);
               height = $this.positionFormat(period[1]);
             } else {
@@ -323,7 +326,7 @@
      * @param options
      */
     add: function (parent, position, height, options) {
-
+      console.log(height)
       if (height <= 0 || position >= this.periodHeight) {
         console.error('Invalid period');
 
@@ -342,7 +345,7 @@
       }
 
       var periodTitle = '<div class="jqs-period-title">' + '</div>';
-      var periodTime = '<div class="jqs-period-time">' + '</div>';
+      var periodTime = '<div class="jqs-period-time">' + this.periodInit(position, position + height) + '</div>';
       var period = $('<div class="jqs-period">' +
         '<div class="jqs-period-container">' + periodTime + periodTitle + periodRemove + periodDuplicate + '</div>' +
         '</div>').css({

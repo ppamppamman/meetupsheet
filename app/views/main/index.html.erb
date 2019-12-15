@@ -2,22 +2,24 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h2>내 시간표</h2>
+        <h4>나의 스케줄</h4>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-8">
-        <div id="schedule4" class="jqs-demo mb-3"></div>
+        <div id="schedule" class="jqs-demo mb-3"></div>
       </div>
     </div>
   </div>
 </main>
-
+asdfasdf
 <script>
   $(function () {
-     $('#schedule4').jqs({
+     $('#schedule').jqs({
       mode: 'edit',
       days: 5,
+      hour: 12,
+      periodDuration: 30,
       periodColors: [
         ['rgba(0, 0, 0, 0.5)', '#000', '#fff'],
         ['rgba(200, 0, 0, 0.5)', '#f00', '#000'],
@@ -28,6 +30,26 @@
       periodBorderColor: '#000',
       periodTextColor: '#fff',
       periodOptions: false,
+      data: [
+    {
+      day: 0,
+      periods: [
+        ['2', '6'], // Compact 12 hour
+        ['10pm', '12am'],
+        ['12am', '2:30am'] // Invalid period, not displayed
+      ]
+    }, {
+      day: 1,
+      periods: [
+        
+      ]
+    }, {
+      day: 2,
+      periods: [
+        
+      ]
+    }
+  ]
     });
     // $('#schedule5').jqs({
     //   mode: 'edit',
