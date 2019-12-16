@@ -1,3 +1,9 @@
+<header>
+  <nav class="navbar navbar-dark bg-dark mb-3">
+    <h1 class="navbar-brand mb-0">MeetUpSheet</h1>
+  </nav>
+</header> 
+
 <main>
   <div class="container">
     <div class="row">
@@ -17,16 +23,16 @@ asdfasdf
   $(function () {
      $('#schedule').jqs({
       mode: 'edit',
-      days: 5,
-      hour: 12,
-      periodDuration: 30,
+      hour: 24,
+      days: 5,      
+      periodDuration: 45, //60->40 30->20
       periodColors: [
-        ['rgba(0, 0, 0, 0.5)', '#000', '#fff'],
-        ['rgba(200, 0, 0, 0.5)', '#f00', '#000'],
-        ['rgba(0, 200, 0, 0.5)', '#0f0', '#000'],
-        ['rgba(0, 0, 200, 0.5)', '#00f', '#000']
+        ['rgba(0, 0, 0, 0.2)', '#000', '#fff'],
+        ['rgba(200, 0, 0, 0.2)', '#f00', '#000'],
+        ['rgba(0, 200, 0, 0.2)', '#0f0', '#000'],
+        ['rgba(0, 0, 200, 0.2)', '#00f', '#000']
       ],
-      periodBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+      periodBackgroundColor: 'rgba(150, 0, 0, 0.25)',
       periodBorderColor: '#000',
       periodTextColor: '#fff',
       periodOptions: false,
@@ -34,9 +40,15 @@ asdfasdf
     {
       day: 0,
       periods: [
-        ['2', '6'], // Compact 12 hour
-        ['10pm', '12am'],
-        ['12am', '2:30am'] // Invalid period, not displayed
+        ['01:30', '02:00'],
+        ['01:30', '02:00'],
+        ['01:30', '02:00'],
+        ['01:30', '02:00'], 
+        ['01:30', '02:00'], 
+        ['01:30', '02:00'], 
+        ['02:00', '02:30'],
+        ['02:00', '02:30'],
+        ['02:00', '02:30'],
       ]
     }, {
       day: 1,

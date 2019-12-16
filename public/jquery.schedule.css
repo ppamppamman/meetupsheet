@@ -23,7 +23,7 @@
 .jqs {
   position: relative;
   padding: 40px 20px 20px 60px;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   font-family: system, -apple-system, Roboto, Helvetica Neue, Arial, Helvetica, Geneva, sans-serif;
   box-sizing: border-box;
 }

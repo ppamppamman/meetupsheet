@@ -1,12 +1,22 @@
 <div class="container">
-  <div class="row align-items-center">
-    <div class="col align-self-center">
-      <h1> 처음 접속하셨나요? </h1>
+  <table id="table-column">
+  <tbody>
+    <tr>
+    <td class="align-middle">
+      <h4> 처음 접속하셨나요? </h4>
       
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-outline-secondary btn-sm">sign up</button>
         <button type="button" class="btn btn-outline-secondary btn-sm">sign in</button>
       </div>
-    </div>
-  </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
+
+<script>
+  window.onload = function(){
+  document.getElementById("table-column").setAttribute("height", window.innerHeight);
+  }
+</script>

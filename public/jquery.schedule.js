@@ -11,7 +11,7 @@
       mode: 'edit', // read
       hour: 24, // 12
       days: 7, // 7/5
-      periodDuration: 30, // 15/30/60
+      periodDuration: 60, // 15/30/60
       data: [],
       periodOptions: true,
       periodColors: [],
@@ -103,13 +103,17 @@
         });
       }
 
+      // PeriodDuration Customize
       // duration validation
-      if ($.inArray(this.settings.periodDuration, [15, 30, 60]) === -1) {
-        throw new Error('Invalid periodDuration');
-      }
+      // if ($.inArray(this.settings.periodDuration, [15, 30, 60]) === -1) {
+      //   throw new Error('Invalid periodDuration');
+      // }
 
+      // period variable customize
+      // this.periodInterval = 60 / this.settings.periodDuration;
       this.periodInterval = 90 / this.settings.periodDuration;
       this.periodHeight = 24 * this.periodInterval;
+      // this.periodPosition = 40 / this.periodInterval;
       this.periodPosition = 60 / this.periodInterval;
 
       $(this.element).addClass('jqs').addClass('jqs-mode-' + this.settings.mode)
@@ -344,8 +348,10 @@
         //   '"></div>';
       }
 
-      var periodTitle = '<div class="jqs-period-title">' + '</div>';
-      var periodTime = '<div class="jqs-period-time">' + this.periodInit(position, position + height) + '</div>';
+      //var periodTitle = '<div class="jqs-period-title">' + '</div>';
+      //var periodTime = '<div class="jqs-period-time">' + this.periodInit(position, position + height) + '</div>';
+      var periodTitle = '';
+      var periodTime = '';
       var period = $('<div class="jqs-period">' +
         '<div class="jqs-period-container">' + periodTime + periodTitle + periodRemove + periodDuplicate + '</div>' +
         '</div>').css({
