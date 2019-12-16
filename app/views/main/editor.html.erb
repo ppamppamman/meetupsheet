@@ -1,12 +1,18 @@
 <link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
 <script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
 <script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<!-- 실제 에디터가 생성될 위치 -->
 <textarea id="editor">
-  <%= Note.first.contents %>
+  <%= Note.first.contents rescue "" %>
 </textarea> 
 
+<div class="container">
+  <button type="button" class="btn btn-outline-secondary btn-sm" onclick="save()">
+    저장하기
+  </button>
+</div>
+  
 <script>
 var editor = new Editor({
   element: document.getElementById("editor")
@@ -14,5 +20,18 @@ var editor = new Editor({
 // editor 객체 생성
 
 editor.render();
-// 랜더링!
+
+function save(){
+  $.ajax({
+    success: function(){
+      Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      )
+    }
+
+  })
+}
+
 </script>
