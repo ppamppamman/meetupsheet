@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+
+<!-- 실제 에디터가 생성될 위치 -->
+<textarea id="editor">
+  <%= Note.first.contents %>
+</textarea> 
+
+<script>
+var editor = new Editor({
+  element: document.getElementById("editor")
+});
+// editor 객체 생성
+
+editor.render();
+// 랜더링!
+</script>
