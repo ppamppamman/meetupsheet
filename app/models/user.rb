@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :schedules
-  belongs_to :group
+  has_many :entries
 end
