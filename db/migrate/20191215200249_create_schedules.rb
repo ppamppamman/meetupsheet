@@ -3,11 +3,7 @@ class CreateSchedules < ActiveRecord::Migration[5.2]
     create_table :schedules do |t|
 
       t.references :user
-      
-      t.integer :week
-      t.integer :day
-      
-      t.string :time
+      t.integer :week, default: 0
 
       t.timestamps
     end

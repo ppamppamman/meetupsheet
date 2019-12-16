@@ -91,34 +91,25 @@
     
     //$('#schedule').jqs('export');
     $.ajax({
-      url: '/users/<%= current_user.id %>/schedule/<%= current_user.schedules.take.id rescue ""%>',
-      type:'POST',
-      data: $('form').serialize(),
+      url: '/users/<%= current_user.id %>/schedules/<%= current_user.schedules.take.id rescue ""%>',
+      type:'PUT',
+      data: { 
+        authenticity_token: "<%= form_authenticity_token %>",
+        schedule: $('#schedule').jqs('export')
+      },
       success:function(data){
         // TODO : ajax user_result.update(play_finish: true) one_more
-        if (data.result == "O"){
+        if (data.message == "OK"){
           Swal.fire({
             icon: 'success',
             title: 'Great!',
             text: 'It\'s true',
             timer: 2000,
             onClose: () => {
-              submit_result(data);
+              location.href = window.location.href
             }
           });
-        }
-        else if (data.result == "X") {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'It\'s false',
-            timer: 2000,
-            onClose: () => {
-              submit_result(data);
-            }
-          });
-        }
-        else {
+        } else {
           alert(" error occured, please notice this help@email.com");
         }
       },
