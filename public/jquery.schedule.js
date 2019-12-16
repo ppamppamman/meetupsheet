@@ -131,7 +131,7 @@
           
           var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
           lastPageY = event.originalEvent.touches[0].pageY;
-          console.log(lastPageY)
+          // console.log(lastPageY)
           position = Math.floor(offset / $this.periodPosition);
 
           if (!$(event.target).hasClass('jqs-period') && $(event.target).parents('.jqs-period').length === 0) {
@@ -178,20 +178,20 @@
         $(this.element).on('touchend', '.jqs-day', function (event) {
           if (!$(event.target).hasClass('jqs-period') && $(event.target).parents('.jqs-period').length === 0) {
             // console.log(event.originalEvent.touches[0].pageY)
-            console.log("origin touch end: " + event.pageY)
-            console.log("find : " + event.view.PageY)
+            // console.log("origin touch end: " + event.pageY)
+            // console.log("find : " + event.view.PageY)
             // var offset = event.pageY - $(this).offset().top;
-            console.log(event)
-            console.log(lastPageY)
+            // console.log(event)
+            // console.log(lastPageY)
             if (lastPageY != null && lastPageY != undefined){
               var offset = lastPageY - $(this).offset().top;
-              console.log(lastPageY)
+              // console.log(lastPageY)
               lastPageY = null;  
             }
             // var offset = lastPageY - $(this).offset().top;
-            console.log(offset)
+            // console.log(offset)
             var height = Math.round(offset / $this.periodPosition) - position;
-            console.log(height)
+            // console.log(height)
             if (height <= 0) {
               height = 1;
             }
@@ -303,7 +303,7 @@
             var options = {};
             var height, position;
             if ($.isArray(period)) {
-              console.log(period)
+              // console.log(period)
               position = $this.positionFormat(period[0]);
               height = $this.positionFormat(period[1]);
             } else {
@@ -330,7 +330,7 @@
      * @param options
      */
     add: function (parent, position, height, options) {
-      console.log(height)
+      // console.log(height)
       if (height <= 0 || position >= this.periodHeight) {
         console.error('Invalid period');
 
