@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+
+<textarea id="editor">
+  <%= Note.first.contents rescue "" %>
+</textarea> 
+
+<div class="container">
+  <button type="button" class="btn btn-outline-secondary btn-sm" onclick="save()">
+    저장하기
+  </button>
+</div>
+  
+<script>
+var editor = new Editor({
+  element: document.getElementById("editor")
+});
+// editor 객체 생성
+
+editor.render();
+
+function save(){
+  $.ajax({
+    success: function(){
+      Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      )
+    }
+
+  })
+}
+
+</script>

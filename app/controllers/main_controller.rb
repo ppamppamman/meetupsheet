@@ -1,6 +1,6 @@
 class MainController < ApplicationController
 
-  def index
+  def mypage
     redirect_to "/main/first" unless user_signed_in?
   end
 
@@ -8,4 +8,6 @@ class MainController < ApplicationController
 
   end
 
+  def editor
+  end
 end
