@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 2019_12_16_184328) do
   end
 
   create_table "notes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "contents"
     t.bigint "group_id"
+    t.string "title"
+    t.text "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_notes_on_group_id"
