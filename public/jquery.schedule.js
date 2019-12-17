@@ -348,9 +348,9 @@
         //   '"></div>';
       }
 
-      //var periodTitle = '<div class="jqs-period-title">' + '</div>';
+      var periodTitle = '<div class="jqs-period-title">' +options.title + '</div>';
       //var periodTime = '<div class="jqs-period-time">' + this.periodInit(position, position + height) + '</div>';
-      var periodTitle = '';
+      // var periodTitle = '';
       var periodTime = '';
       var period = $('<div class="jqs-period">' +
         '<div class="jqs-period-container">' + periodTime + periodTitle + periodRemove + periodDuplicate + '</div>' +

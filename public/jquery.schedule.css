@@ -138,7 +138,7 @@
   display: none;
 }
 .jqs-period-30 .jqs-period-title {
-  display: none;
+  /* display: none; */
 }
 .jqs-period-time, .jqs-period-title {
   display: block;

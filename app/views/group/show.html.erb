@@ -7,7 +7,9 @@
     </div>
     <div class="row">
       <div class="col-lg-8">
-        종합 분석
+        통계
+        <br>
+        <%= render '/group/analysis' %>
       </div>
     </div>
     <div class="row">
@@ -38,15 +40,21 @@
       ],
       periodBackgroundColor: 'rgba(150, 0, 0, 0.25)',
       periodBorderColor: '#000',
-      periodTextColor: '#fff',
       periodOptions: false,
       data: [
-        <% @group.entries.each do |entry| %>
-          <% entry.user.schedules.first.periods.each do |period| %>
+        <% @group.entries.each_with_index do |entry, e_idx| %>
+          <% entry.user.schedules.first.periods.each do |period, p_idx| %>
             {
               day: <%= period.day %>,
               periods: [
-                ["<%= period.start %>", "<%= period.end %>"],
+                {
+                  start: "<%= period.start %>", 
+                  end: "<%= period.end %>",
+                  <% if @analysis_arr[period.day][@preiods.index(period.start)] != 0 %>
+                    title: '<%= @analysis_arr[period.day][@preiods.index(period.start)]%>',
+                    textColor: '#000'
+                  <% end %>
+                }
               ]
             },
           <% end %>
