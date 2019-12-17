@@ -41,58 +41,17 @@
       periodTextColor: '#fff',
       periodOptions: false,
       data: [
-    {
-      day: 0,
-      periods: [
-        ['01:30', '02:00'],
-        ['01:30', '02:00'],
-        ['01:30', '02:00'],
-        ['01:30', '02:00'], 
-        ['01:30', '02:00'], 
-        ['01:30', '02:00'], 
-        ['02:00', '02:30'],
-        ['02:00', '02:30'],
-        ['02:00', '02:30'],
+        <% @group.entries.each do |entry| %>
+          <% entry.user.schedules.first.periods.each do |period| %>
+            {
+              day: <%= period.day %>,
+              periods: [
+                ["<%= period.start %>", "<%= period.end %>"],
+              ]
+            },
+          <% end %>
+        <% end %>
       ]
-    }, {
-      day: 1,
-      periods: [
-        
-      ]
-    }, {
-      day: 2,
-      periods: [
-        
-      ]
-    }
-  ]
     });
-    // $('#schedule5').jqs({
-    //   mode: 'edit',
-    //   daysList: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
-    //   hour: 12,
-    //   periodDuration: 15,
-    //   periodOptions: false,
-    //   data: [
-    //     {
-    //       day: 0,
-    //       periods: [
-    //         ['2', '6'], // Compact 12 hour
-    //         ['10pm', '12am'],
-    //         ['12am', '2:30am'] // Invalid period, not displayed
-    //       ]
-    //     }, {
-    //       day: 1,
-    //       periods: [
-    //         ['1:45am', '5:15am']
-    //       ]
-    //     }, {
-    //       day: 2,
-    //       periods: [
-    //         ['2', '2p'] // Compact 12 hour
-    //       ]
-    //     }
-    //   ]
-    // });
   });
 </script>
