@@ -7,6 +7,7 @@ class SchedulesController < ApplicationController
   # schedules#update
   def update
     begin
+      current_user.schedules.take.periods.destroy_all
       JSON.parse(params[:schedule]).each do |day_schedule|
         day_schedule["periods"].each do |period|
           current_user.schedules.take.periods.where(
