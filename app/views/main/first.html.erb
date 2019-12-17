@@ -1,0 +1,22 @@
+<div class="container">
+  <table id="table-column">
+  <tbody>
+    <tr>
+    <td class="align-middle">
+      <h4> 처음 접속하셨나요? </h4>
+      
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/users/sign_up'">sign up</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/users/sign_in'">sign in</button>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<script>
+  window.onload = function(){
+  document.getElementById("table-column").setAttribute("height", window.innerHeight);
+  }
+</script>

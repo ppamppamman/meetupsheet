@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+
+<div class="container">
+  <input type="text" class="form-control" name="title" id="title" placeholder="노트 제목">
+  <br>
+</div>
+
+<textarea id="editor">
+</textarea> 
+
+<div class="container">
+  <button type="button" class="btn btn-outline-secondary btn-sm" onclick="save()">
+    저장하기
+  </button>
+  <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/group/<%= @group.id %>/notes/list'">
+    돌아가기
+  </button>
+</div>
+  
+<script>
+var editor = new Editor({
+  element: document.getElementById("editor")
+});
+// editor 객체 생성
+
+editor.render();
+
+function save(){
+  
+  $.ajax({
+    url: '/group/<%= @group.id %>/notes/create',
+    type:'POST',
+    data: { 
+      authenticity_token: "<%= form_authenticity_token %>",
+      title: $("input#title")[0].value,
+      contents: editor.codemirror.getValue()
+    },
+    success:function(data){
+      if (data.message == "OK"){
+        Swal.fire({
+          icon: 'success',
+          title: '저장 성공!',
+          text: '저장이 완료되었습니다.',
+          timer: 2000,
+          onClose: () => {
+            location.href = '/group/'+data.result.group_id+'/notes/'+data.result.id+'/show'
+          }
+        });
+      } else {
+        alert(" error occured, please notice this help@email.com");
+      }
+    },
+    error:function(request, error){
+      console.log(request.status+" / "+request.responseText);
+      Swal.fire({
+      icon: 'error',
+        title: 'Oops...',
+        text: 'It\'s error!!!'
+      });
+    }
+  });
+}
+
+</script>

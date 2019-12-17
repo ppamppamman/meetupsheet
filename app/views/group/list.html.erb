@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4>그룹 리스트</h4>
+    </div>
+  </div>
+  <a href="/group/index"> 돌아가기 </a>
+  <br>
+  <br>
+  <% @groups.each do |group| %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= group.id %> : <%= group.name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"> 그룹장 : <%= group.entries.first.user.email %> </h6>
+        <p class="card-text"> <%= group.description %> </p>
+        <% if current_user.entries.pluck(:group_id).include?(group.id) %>
+          <a href="/group/show/<%= group.id %>" class="card-link">입장하기</a>
+        <% else %>
+          <a href="/group/enroll/<%= group.id %>" class="card-link">그룹 등록하기</a>
+        <% end %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+</div>

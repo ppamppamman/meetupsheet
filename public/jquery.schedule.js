@@ -11,7 +11,7 @@
       mode: 'edit', // read
       hour: 24, // 12
       days: 7, // 7/5
-      periodDuration: 30, // 15/30/60
+      periodDuration: 60, // 15/30/60
       data: [],
       periodOptions: true,
       periodColors: [],
@@ -103,13 +103,17 @@
         });
       }
 
+      // PeriodDuration Customize
       // duration validation
-      if ($.inArray(this.settings.periodDuration, [15, 30, 60]) === -1) {
-        throw new Error('Invalid periodDuration');
-      }
+      // if ($.inArray(this.settings.periodDuration, [15, 30, 60]) === -1) {
+      //   throw new Error('Invalid periodDuration');
+      // }
 
-      this.periodInterval = 60 / this.settings.periodDuration;
+      // period variable customize
+      // this.periodInterval = 60 / this.settings.periodDuration;
+      this.periodInterval = 90 / this.settings.periodDuration;
       this.periodHeight = 24 * this.periodInterval;
+      // this.periodPosition = 40 / this.periodInterval;
       this.periodPosition = 60 / this.periodInterval;
 
       $(this.element).addClass('jqs').addClass('jqs-mode-' + this.settings.mode)
@@ -124,9 +128,10 @@
         // $(this.element).on('mousedown', '.jqs-day', function (event) {
         $(this.element).on('touchstart', '.jqs-day', function (event) {
           // var offset = event.pageY - $(this).offset().top;
+          
           var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
           lastPageY = event.originalEvent.touches[0].pageY;
-          console.log(lastPageY)
+          // console.log(lastPageY)
           position = Math.floor(offset / $this.periodPosition);
 
           if (!$(event.target).hasClass('jqs-period') && $(event.target).parents('.jqs-period').length === 0) {
@@ -145,47 +150,48 @@
         });
         
         // $(this.element).on('mousemove', '.jqs-day', function (event) {
-        $(this.element).on('touchmove', '.jqs-day', function (event) {
-          if (helper) {
-            // var offset = event.pageY - $(this).offset().top;
-            var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
-            lastPageY = event.originalEvent.touches[0].pageY;
-            console.log(lastPageY)
-            var height = Math.round(offset / $this.periodPosition) - position;
-            if (height <= 0) {
-              height = 1;
-            }
+        // $(this.element).on('touchmove', '.jqs-day', function (event) {
 
-            helper.css({
-              'height': height * $this.periodPosition
-            });
+        //   if (helper) {
+        //     // var offset = event.pageY - $(this).offset().top;
+        //     var offset = event.originalEvent.touches[0].pageY - $(this).offset().top;
+        //     lastPageY = event.originalEvent.touches[0].pageY;
+        //     console.log(lastPageY)
+        //     var height = Math.round(offset / $this.periodPosition) - position;
+        //     if (height <= 0) {
+        //       height = 1;
+        //     }
 
-            if (height >= 1) {
-              $('.jqs-period-helper-time', helper).text($this.periodInit(position, position + height));
-            } else {
-              $('.jqs-period-helper-time', helper).text('');
-            }
-          }
-        });
+        //     helper.css({
+        //       'height': height * $this.periodPosition
+        //     });
+
+        //     if (height >= 1) {
+        //       $('.jqs-period-helper-time', helper).text($this.periodInit(position, position + height));
+        //     } else {
+        //       $('.jqs-period-helper-time', helper).text('');
+        //     }
+        //   }
+        // });
 
         // $(this.element).on('mouseup', '.jqs-day', function (event) {
         $(this.element).on('touchend', '.jqs-day', function (event) {
           if (!$(event.target).hasClass('jqs-period') && $(event.target).parents('.jqs-period').length === 0) {
             // console.log(event.originalEvent.touches[0].pageY)
-            console.log("origin touch end: " + event.pageY)
-            console.log("find : " + event.view.PageY)
+            // console.log("origin touch end: " + event.pageY)
+            // console.log("find : " + event.view.PageY)
             // var offset = event.pageY - $(this).offset().top;
-            console.log(event)
-            console.log(lastPageY)
+            // console.log(event)
+            // console.log(lastPageY)
             if (lastPageY != null && lastPageY != undefined){
               var offset = lastPageY - $(this).offset().top;
-              console.log(lastPageY)
+              // console.log(lastPageY)
               lastPageY = null;  
             }
             // var offset = lastPageY - $(this).offset().top;
-            console.log(offset)
+            // console.log(offset)
             var height = Math.round(offset / $this.periodPosition) - position;
-            console.log(height)
+            // console.log(height)
             if (height <= 0) {
               height = 1;
             }
@@ -297,6 +303,7 @@
             var options = {};
             var height, position;
             if ($.isArray(period)) {
+              // console.log(period)
               position = $this.positionFormat(period[0]);
               height = $this.positionFormat(period[1]);
             } else {
@@ -323,7 +330,7 @@
      * @param options
      */
     add: function (parent, position, height, options) {
-
+      // console.log(height)
       if (height <= 0 || position >= this.periodHeight) {
         console.error('Invalid period');
 
@@ -341,8 +348,10 @@
         //   '"></div>';
       }
 
-      var periodTitle = '<div class="jqs-period-title">' + '</div>';
-      var periodTime = '<div class="jqs-period-time">' + '</div>';
+      var periodTitle = '<div class="jqs-period-title">' +options.title + '</div>';
+      //var periodTime = '<div class="jqs-period-time">' + this.periodInit(position, position + height) + '</div>';
+      // var periodTitle = '';
+      var periodTime = '';
       var period = $('<div class="jqs-period">' +
         '<div class="jqs-period-container">' + periodTime + periodTitle + periodRemove + periodDuplicate + '</div>' +
         '</div>').css({

@@ -1,0 +1,38 @@
+<div class="container">
+  <table id="table-column">
+  <tbody>
+    <tr>
+      <% if current_user.entries.empty? %>
+        <td class="align-middle">
+          <h4> 그룹을 찾고 있나요? </h4>
+          <h4> 새 그룹을 만들어보세요! </h4>
+          <a href="/group/new">그룹 만들기</a>
+          <a href="/group/list">그룹 찾아보기</a>
+        </td>
+      <% else %>
+        <td class="align-baseline">
+          <h4> 나의 그룹리스트 </h4>
+          <% current_user.entries.each do |entry| %>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= entry.group.id %> : <%= entry.group.name %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"> 그룹장 : <%= entry.group.entries.first.user.email %> </h6>
+                <p class="card-text"> <%= entry.group.description %> </p>
+                <a href="/group/show/<%= entry.group.id %>" class="card-link">입장하기</a>
+              </div>
+            </div>
+            <br>
+          <% end %>
+          
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<script>
+  window.onload = function(){
+    document.getElementById("table-column").setAttribute("height", window.innerHeight);
+  }
+</script>
