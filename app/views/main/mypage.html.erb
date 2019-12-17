@@ -35,23 +35,14 @@
       periodTextColor: '#fff',
       periodOptions: false,
       data: [
-        {
-          day: 0,
-          periods: [
-            ['01:30', '02:00'],
-            ['02:00', '02:30'],
-          ]
-        }, {
-          day: 1,
-          periods: [
-            
-          ]
-        }, {
-          day: 2,
-          periods: [
-            
-          ]
-        }
+        <% current_user.schedules.first.periods.each do |period| %>
+          {
+            day: <%= period.day %>,
+            periods: [
+              ["<%= period.start %>", "<%= period.end %>"],
+            ]
+          },
+        <% end %>
       ],
       onAddPeriod: function(period, jqs){
         console.log(period)
@@ -98,12 +89,11 @@
         schedule: $('#schedule').jqs('export')
       },
       success:function(data){
-        // TODO : ajax user_result.update(play_finish: true) one_more
         if (data.message == "OK"){
           Swal.fire({
             icon: 'success',
-            title: 'Great!',
-            text: 'It\'s true',
+            title: '저장 성공!',
+            text: '저장이 완료되었습니다.',
             timer: 2000,
             onClose: () => {
               location.href = window.location.href
@@ -116,7 +106,7 @@
       error:function(request, error){
         console.log(request.status+" / "+request.responseText);
         Swal.fire({
-          icon: 'error',
+        icon: 'error',
           title: 'Oops...',
           text: 'It\'s error!!!'
         });
